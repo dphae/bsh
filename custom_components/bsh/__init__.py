@@ -74,15 +74,11 @@ async def async_setup(hass, config):
         entities_values['this month start power'] = None if response_json['last'] == '-----' else float(response_json['last'])
         entities_values['this month power'] = float(response_json['beforelast'])
         entities_values['this month power cost'] = round(billing['electricity'] * entities_values['this month power'], 2)
-        #entities_values['this month power cost estimate'] = round(entities_values['this month power cost'] + entities_values['this month power cost'] * month_rest / month_past, 2)
-        #entities_values['this month power estimate'] = round(entities_values['this month power'] + entities_values['this month power'] * month_rest / month_past, 3)
 
         response = await session.get('https://sh.od.ua/user/indicators/energy-day/')
         response_json = await response.json(content_type=None)
         await response.release()
         response_values = list(filter(lambda x: x[1], response_json))
-        #for value in response_values:
-        #    print(value[0], datetime.fromtimestamp(round(value[0]/1000)), value[1])
         entities_values['last tick power'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > tick_start_ms, response_values))), 3)
         entities_values['last hour power'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > hour_start_ms, response_values))), 3)
         entities_values['last 24h power'] = round(sum(map(lambda x: x[1], response_values)), 3)
@@ -130,8 +126,6 @@ async def async_setup(hass, config):
         entities_values['this month start heat energy'] = float(response_json['last'])
         entities_values['this month heat energy'] = float(response_json['beforelast'])
         entities_values['this month heat energy cost'] = round(billing['heating'] * entities_values['this month heat energy'], 2)
-        #entities_values['this month heat energy cost estimate'] = round(entities_values['this month heat energy cost'] + entities_values['this month heat energy cost'] * month_rest / month_past, 2)
-        #entities_values['this month heat energy estimate'] = round(entities_values['this month heat energy'] + entities_values['this month heat energy'] * month_rest / month_past, 3)
 
         #response = await session.get('https://sh.od.ua/user/indicators/heating-day/')
         response = await session.post(
@@ -188,15 +182,11 @@ async def async_setup(hass, config):
         entities_values['this month start hot water'] = float(response_json['hot_last'])
         entities_values['this month hot water'] = float(response_json['hot_beforelast'])
         entities_values['this month hot water cost'] = round(billing['hot_water'] * entities_values['this month hot water'], 2)
-        #entities_values['this month hot water cost estimate'] = round(entities_values['this month hot water cost'] + entities_values['this month hot water cost'] * month_rest / month_past, 2)
-        #entities_values['this month hot water estimate'] = round(entities_values['this month hot water'] + entities_values['this month hot water'] * month_rest / month_past, 3)
 
         entities_values['current cold water'] = float(response_json['cold_current'])
         entities_values['this month start cold water'] = float(response_json['cold_last'])
         entities_values['this month cold water'] = float(response_json['cold_beforelast'])
         entities_values['this month cold water cost'] = round(billing['cold_water'] * entities_values['this month cold water'], 2)
-        #entities_values['this month cold water cost estimate'] = round(entities_values['this month cold water cost'] + entities_values['this month cold water cost'] * month_rest / month_past)
-        #entities_values['this month cold water estimate'] = round(entities_values['this month cold water'] + entities_values['this month cold water'] * month_rest / month_past, 3)
 
         response = await session.get('https://sh.od.ua/user/indicators/hot-water-day/')
         response_json = await response.json(content_type=None)
@@ -346,9 +336,6 @@ async def async_setup(hass, config):
     else:
         logger.error('auth has failed!')
         return False
-
-# async def async_setup_entry(hass, config_entry, async_add_devices):
-#     print("Set up entry!!!")
 
 
 # hub.update() is a sync function.
