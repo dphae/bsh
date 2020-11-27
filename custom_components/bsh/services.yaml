@@ -1,0 +1,16 @@
+update:
+    description: Update all sensors data.
+
+set_day_temperature:
+    description: Set heating target day temperature.
+    fields:
+        temperature:
+            description: temperature to set (in Celsius)
+            example: 20
+
+set_night_temperature:
+    description: Set heating target night temperature.
+    fields:
+        temperature:
+            description: temperature to set (in Celsius)
+            example: 20

@@ -1,0 +1,10 @@
+{
+    "name": "Budova Smart Home",
+    "country": "UA",
+    "content_in_root": false,
+    "domains": [
+        "sensor"
+    ],
+    "iot_class": "Cloud Polling",
+    "homeassistant": "0.118.0"
+}
