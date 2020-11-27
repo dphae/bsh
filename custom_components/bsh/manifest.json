@@ -1,9 +1,9 @@
 {
     "domain": "bsh",
     "name": "Budova Smart Home",
-    "documentation": "",
-    "issue_tracker": "",
+    "documentation": "https://github.com/DarkPark/bsh",
+    "issue_tracker": "https://github.com/DarkPark/bsh/issues",
     "dependencies": [],
-    "codeowners": [],
+    "codeowners": ["@DarkPark"],
     "requirements": []
 }
