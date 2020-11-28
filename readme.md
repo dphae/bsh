@@ -3,7 +3,11 @@ Budova Smart Home
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 
-A Home Assistant integration for https://sh.od.ua/.
+Home Assistant integration for https://sh.od.ua/.
+It provides a lot of sensors for electricity, hot/cold water and heating monitoring. Allows to set target day and night temperature.
+Some sensors:
+
+![alt text](images/hot-water.png)
 
 
 ## Installation
