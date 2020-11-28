@@ -18,7 +18,7 @@ Copy `bsh` directory to your Home Assistant `config/custom_components` directory
 
 ### HACS
 
-In [HACS](https://hacs.xyz/) settings add a custom repository https://github.com/DarkPark/bsh with `Integration` category.
+In [HACS](https://hacs.xyz/) settings add a custom repository https://github.com/dphae/bsh with `Integration` category.
 Then the `bsh` custom component will be installable through HACS and you will be able to follow the future updates.
 
 
