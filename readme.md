@@ -7,7 +7,7 @@ Home Assistant integration for https://sh.od.ua/.
 It provides a lot of sensors for electricity, hot/cold water and heating monitoring. Allows to set target day and night temperature.
 Some sensors:
 
-![alt text](images/hot-water.png)
+![alt text](https://raw.githubusercontent.com/dphae/bsh/main/images/hot-water.png)
 
 
 ## Installation
