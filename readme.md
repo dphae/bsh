@@ -151,34 +151,34 @@ views:
               - sensor.bsh_this_day_min_voltage
               - sensor.bsh_this_day_max_voltage
               - type: divider
-              - sensor.bsh_last_tick_energy
-              - sensor.bsh_last_hour_energy
-              - sensor.bsh_this_day_energy
-              - sensor.bsh_last_24h_energy
-              - sensor.bsh_this_month_energy
-              - type: divider
               - sensor.bsh_last_tick_power
               - sensor.bsh_last_hour_power
               - sensor.bsh_this_day_power
               - sensor.bsh_last_24h_power
               - sensor.bsh_this_month_power
-              - sensor.bsh_this_month_power_estimate
-              - sensor.bsh_this_month_start_power
-              - sensor.bsh_current_power
               - type: divider
-              - sensor.bsh_last_hour_power_cost
-              - sensor.bsh_last_24h_power_cost
-              - sensor.bsh_this_month_power_cost
-              - sensor.bsh_this_month_power_cost_estimate
+              - sensor.bsh_last_tick_energy
+              - sensor.bsh_last_hour_energy
+              - sensor.bsh_this_day_energy
+              - sensor.bsh_last_24h_energy
+              - sensor.bsh_this_month_energy
+              - sensor.bsh_this_month_energy_estimate
+              - sensor.bsh_this_month_start_energy
+              - sensor.bsh_current_energy
+              - type: divider
+              - sensor.bsh_last_hour_energy_cost
+              - sensor.bsh_last_24h_energy_cost
+              - sensor.bsh_this_month_energy_cost
+              - sensor.bsh_this_month_energy_cost_estimate
           - type: history-graph
             hours_to_show: 3
             entities:
               - sensor.bsh_current_voltage
               - sensor.bsh_this_day_min_voltage
               - sensor.bsh_this_day_max_voltage
-              - sensor.bsh_last_tick_energy
-              - sensor.bsh_last_hour_energy
-              - sensor.bsh_last_24h_energy
+              - sensor.bsh_last_tick_power
+              - sensor.bsh_last_hour_power
+              - sensor.bsh_last_24h_power
     
       - type: vertical-stack
         cards:

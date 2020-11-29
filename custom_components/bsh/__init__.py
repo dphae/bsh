@@ -70,31 +70,31 @@ async def async_setup(hass, config):
         response_json = await response.json(content_type=None)
         await response.release()
 
-        entities_values['current power'] = float(response_json['current'])
-        entities_values['this month start power'] = None if response_json['last'] == '-----' else float(response_json['last'])
-        entities_values['this month power'] = float(response_json['beforelast'])
-        entities_values['this month power cost'] = round(billing['electricity'] * entities_values['this month power'], 2)
+        entities_values['current energy'] = float(response_json['current'])
+        entities_values['this month start energy'] = None if response_json['last'] == '-----' else float(response_json['last'])
+        entities_values['this month energy'] = float(response_json['beforelast'])
+        entities_values['this month energy cost'] = round(billing['electricity'] * entities_values['this month energy'], 2)
 
         response = await session.get('https://sh.od.ua/user/indicators/energy-day/')
         response_json = await response.json(content_type=None)
         await response.release()
         response_values = list(filter(lambda x: x[1], response_json))
-        entities_values['last tick power'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > tick_start_ms, response_values))), 3)
-        entities_values['last hour power'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > hour_start_ms, response_values))), 3)
-        entities_values['last 24h power'] = round(sum(map(lambda x: x[1], response_values)), 3)
-        entities_values['this day power'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > day_start_ms, response_values))), 3)
+        entities_values['last tick energy'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > tick_start_ms, response_values))), 3)
+        entities_values['last hour energy'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > hour_start_ms, response_values))), 3)
+        entities_values['last 24h energy'] = round(sum(map(lambda x: x[1], response_values)), 3)
+        entities_values['this day energy'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > day_start_ms, response_values))), 3)
 
-        entities_values['last hour power cost'] = round(billing['electricity'] * entities_values['last hour power'], 2)
-        entities_values['last 24h power cost'] = round(billing['electricity'] * entities_values['last 24h power'], 2)
+        entities_values['last hour energy cost'] = round(billing['electricity'] * entities_values['last hour energy'], 2)
+        entities_values['last 24h energy cost'] = round(billing['electricity'] * entities_values['last 24h energy'], 2)
 
-        entities_values['this month power estimate'] = round(entities_values['this month power'] + entities_values['last 24h power'] * (month_rest / 3600 / 24), 3)
-        entities_values['this month power cost estimate'] = round(billing['electricity'] * entities_values['this month power estimate'], 2)
+        entities_values['this month energy estimate'] = round(entities_values['this month energy'] + entities_values['last 24h energy'] * (month_rest / 3600 / 24), 3)
+        entities_values['this month energy cost estimate'] = round(billing['electricity'] * entities_values['this month energy estimate'], 2)
 
-        entities_values['last tick energy'] = round(entities_values['last tick power'] * 1000 * 3600 / conf['interval'])
-        entities_values['last hour energy'] = round(entities_values['last hour power'] * 1000)
-        entities_values['last 24h energy'] = round(entities_values['last 24h power'] * 1000 / 24)
-        entities_values['this day energy'] = round(entities_values['this day power'] * 1000 / day_start_hours)
-        entities_values['this month energy'] = round(entities_values['this month power'] * 1000 / (month_past / 3600))
+        entities_values['last tick power'] = round(entities_values['last tick energy'] * 1000 * 3600 / conf['interval'])
+        entities_values['last hour power'] = round(entities_values['last hour energy'] * 1000)
+        entities_values['last 24h power'] = round(entities_values['last 24h energy'] * 1000 / 24)
+        entities_values['this day power'] = round(entities_values['this day energy'] * 1000 / day_start_hours)
+        entities_values['this month power'] = round(entities_values['this month energy'] * 1000 / (month_past / 3600))
 
         response = await session.get('https://sh.od.ua/user/indicators/indicators/')
         response_json = await response.json(content_type=None)
@@ -224,25 +224,25 @@ async def async_setup(hass, config):
         ### billing ###
         
         entities_values['last hour total cost'] = round(
-            entities_values['last hour power cost'] +
+            entities_values['last hour energy cost'] +
             entities_values['last hour heat energy cost'] +
             entities_values['last hour hot water cost'] +
             entities_values['last hour cold water cost']
         , 2)
         entities_values['last 24h total cost'] = round(
-            entities_values['last 24h power cost'] +
+            entities_values['last 24h energy cost'] +
             entities_values['last 24h heat energy cost'] +
             entities_values['last 24h hot water cost'] +
             entities_values['last 24h cold water cost']
         , 2)
         entities_values['this month total cost'] = round(
-            entities_values['this month power cost'] +
+            entities_values['this month energy cost'] +
             entities_values['this month heat energy cost'] +
             entities_values['this month hot water cost'] +
             entities_values['this month cold water cost']
         , 2)
         entities_values['this month total cost estimate'] = round(
-            entities_values['this month power cost estimate'] + 
+            entities_values['this month energy cost estimate'] + 
             entities_values['this month heat energy cost estimate'] + 
             entities_values['this month hot water cost estimate'] +
             entities_values['this month cold water cost estimate']

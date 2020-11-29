@@ -2,8 +2,8 @@ from homeassistant.const import (
     STATE_OFF,
     STATE_ON,
     TEMP_CELSIUS,
-    ENERGY_WATT_HOUR,
-    POWER_KILO_WATT,
+    POWER_WATT,
+    ENERGY_KILO_WATT_HOUR,
     VOLT,
     TIME_SECONDS,
     VOLUME_CUBIC_METERS
@@ -18,28 +18,28 @@ MONEY_UAH = 'UAH'
 
 sensors = [
     {
-        'key': 'last 24h energy',
-        'unit': ENERGY_WATT_HOUR,
+        'key': 'last 24h power',
+        'unit': POWER_WATT,
         'icon': 'mdi:flash-circle'
     },
     {
-        'key': 'last hour energy',
-        'unit': ENERGY_WATT_HOUR,
+        'key': 'last hour power',
+        'unit': POWER_WATT,
         'icon': 'mdi:flash-circle'
     },
     {
-        'key': 'last tick energy',
-        'unit': ENERGY_WATT_HOUR,
+        'key': 'last tick power',
+        'unit': POWER_WATT,
         'icon': 'mdi:flash-circle'
     },
     {
-        'key': 'this day energy',
-        'unit': ENERGY_WATT_HOUR,
+        'key': 'this day power',
+        'unit': POWER_WATT,
         'icon': 'mdi:flash-circle'
     },
     {
-        'key': 'this month energy',
-        'unit': ENERGY_WATT_HOUR,
+        'key': 'this month power',
+        'unit': POWER_WATT,
         'icon': 'mdi:flash-circle'
     },
     
@@ -105,63 +105,63 @@ sensors = [
     },
 
     {
-        'key': 'current power',
-        'unit': POWER_KILO_WATT,
+        'key': 'current energy',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
     {
-        'key': 'last 24h power',
-        'unit': POWER_KILO_WATT,
+        'key': 'last 24h energy',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
     {
-        'key': 'last 24h power cost',
+        'key': 'last 24h energy cost',
         'unit': MONEY_UAH,
         'icon': 'mdi:currency-usd'
     },
     {
-        'key': 'last hour power',
-        'unit': POWER_KILO_WATT,
+        'key': 'last hour energy',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
     {
-        'key': 'last hour power cost',
+        'key': 'last hour energy cost',
         'unit': MONEY_UAH,
         'icon': 'mdi:currency-usd'
     },
     {
-        'key': 'last tick power',
-        'unit': POWER_KILO_WATT,
+        'key': 'last tick energy',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
     {
-        'key': 'this day power',
-        'unit': POWER_KILO_WATT,
+        'key': 'this day energy',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
     {
-        'key': 'this month power',
-        'unit': POWER_KILO_WATT,
+        'key': 'this month energy',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
     {
-        'key': 'this month power cost',
+        'key': 'this month energy cost',
         'unit': MONEY_UAH,
         'icon': 'mdi:currency-usd'
     },
     {
-        'key': 'this month power cost estimate',
+        'key': 'this month energy cost estimate',
         'unit': MONEY_UAH,
         'icon': 'mdi:currency-usd'
     },
     {
-        'key': 'this month power estimate',
-        'unit': POWER_KILO_WATT,
+        'key': 'this month energy estimate',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
     {
-        'key': 'this month start power',
-        'unit': POWER_KILO_WATT,
+        'key': 'this month start energy',
+        'unit': ENERGY_KILO_WATT_HOUR,
         'icon': 'mdi:power-plug'
     },
 
