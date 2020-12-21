@@ -1,7 +1,7 @@
 Budova Smart Home
 =================
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dphae/bsh/push%20actions?style=for-the-badge)
 
 Home Assistant integration for https://sh.od.ua/.
@@ -9,7 +9,7 @@ It provides a lot of sensors for electricity, hot/cold water and heating monitor
 Some sensors:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/dphae/bsh/main/images/screenshots/hot-water.png">
+    <img src="https://raw.githubusercontent.com/dphae/bsh/main/images/screenshots/hot-water.png">
 </p>
 
 
@@ -21,8 +21,7 @@ Copy `bsh` directory to your Home Assistant `config/custom_components` directory
 
 ### HACS
 
-In [HACS](https://hacs.xyz/) settings add a custom repository https://github.com/dphae/bsh with `Integration` category.
-Then the `bsh` custom component will be installable through HACS and you will be able to follow the future updates.
+Install [HACS](https://hacs.xyz/) and search for `Budova Smart Home` there. This way you get updates automatically.
 
 
 ## Configuration
