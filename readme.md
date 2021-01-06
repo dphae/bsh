@@ -36,8 +36,8 @@ bsh:
     billing:
         electricity: 1.68
         cold_water: 26.724
-        hot_water: 96.004
-        heating: 1185.00
+        hot_water: 99.884
+        heating: 1294.00
 
 input_number:
     bsh_day_temperature:
