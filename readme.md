@@ -35,8 +35,8 @@ bsh:
     interval: 300
     billing:
         electricity: 1.68
-        cold_water: 26.724
-        hot_water: 99.884
+        cold_water: 30.024
+        hot_water: 103.184
         heating: 1294.00
 
 input_number:
@@ -252,4 +252,3 @@ views:
             entities:
               - sensor.bsh_last_24h_heat_energy
 ```
-
