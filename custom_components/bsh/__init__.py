@@ -5,7 +5,7 @@ import calendar
 import voluptuous as vol
 import json
 import homeassistant.helpers.config_validation as cv
-from aiohttp import ClientSession, ClientResponse, CookieJar
+from aiohttp import ClientSession, ClientResponse, CookieJar, TCPConnector
 from homeassistant.core import callback
 from homeassistant.helpers.event import async_track_time_interval
 from datetime import datetime, timedelta
@@ -30,7 +30,7 @@ async def async_setup(hass, config):
         'entities': entities
     }
 
-    session = ClientSession(cookie_jar=cookie_jar)
+    session = ClientSession(cookie_jar=cookie_jar, connector=TCPConnector(verify_ssl=False))
     response = await session.post(
         'https://sh.od.ua/auth.php',
         headers = {
@@ -62,8 +62,8 @@ async def async_setup(hass, config):
         month_past = (now - datetime(now.year, now.month, 1)).total_seconds()
         month_rest = (datetime(now.year, now.month, calendar.monthrange(now.year, now.month)[1]) - now).total_seconds() + 86400
 
-        session = ClientSession(cookie_jar=cookie_jar)
-        
+        session = ClientSession(cookie_jar=cookie_jar, connector=TCPConnector(verify_ssl=False))
+
         ### electricity ###
 
         response = await session.get('https://sh.od.ua/user/light/indicators/')
@@ -100,7 +100,7 @@ async def async_setup(hass, config):
         response_json = await response.json(content_type=None)
         await response.release()
         entities_values['current voltage'] = float(response_json['voltage'])
-        
+
         response = await session.post(
             'https://sh.od.ua/user/light/data-graph-voltage/',
             headers = {
@@ -146,7 +146,7 @@ async def async_setup(hass, config):
         entities_values['last hour heat energy'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > hour_start_ms, response_values))), 3)
         entities_values['last 24h heat energy'] = round(sum(map(lambda x: x[1], response_values)), 3)
         entities_values['this day heat energy'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > day_start_ms, response_values))), 3)
-        
+
         entities_values['last hour heat energy cost'] = round(billing['heating'] * entities_values['last hour heat energy'], 2)
         entities_values['last 24h heat energy cost'] = round(billing['heating'] * entities_values['last 24h heat energy'], 2)
 
@@ -196,7 +196,7 @@ async def async_setup(hass, config):
         entities_values['last hour hot water'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > hour_start_ms, response_values))), 3)
         entities_values['last 24h hot water'] = round(sum(map(lambda x: x[1], response_values)), 3)
         entities_values['this day hot water'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > day_start_ms, response_values))), 3)
-        
+
         entities_values['last hour hot water cost'] = round(billing['hot_water'] * entities_values['last hour hot water'], 2)
         entities_values['last 24h hot water cost'] = round(billing['hot_water'] * entities_values['last 24h hot water'], 2)
 
@@ -212,7 +212,7 @@ async def async_setup(hass, config):
         entities_values['last hour cold water'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > hour_start_ms, response_values))), 3)
         entities_values['last 24h cold water'] = round(sum(map(lambda x: x[1], response_values)), 3)
         entities_values['this day cold water'] = round(sum(map(lambda x: x[1], filter(lambda x: x[0] > day_start_ms, response_values))), 3)
-        
+
         entities_values['last hour cold water cost'] = round(billing['cold_water'] * entities_values['last hour cold water'], 2)
         entities_values['last 24h cold water cost'] = round(billing['cold_water'] * entities_values['last 24h cold water'], 2)
 
@@ -222,7 +222,7 @@ async def async_setup(hass, config):
         await session.close()
 
         ### billing ###
-        
+
         entities_values['last hour total cost'] = round(
             entities_values['last hour energy cost'] +
             entities_values['last hour heat energy cost'] +
@@ -242,8 +242,8 @@ async def async_setup(hass, config):
             entities_values['this month cold water cost']
         , 2)
         entities_values['this month total cost estimate'] = round(
-            entities_values['this month energy cost estimate'] + 
-            entities_values['this month heat energy cost estimate'] + 
+            entities_values['this month energy cost estimate'] +
+            entities_values['this month heat energy cost estimate'] +
             entities_values['this month hot water cost estimate'] +
             entities_values['this month cold water cost estimate']
         , 2)
@@ -262,7 +262,7 @@ async def async_setup(hass, config):
         temperature = call.data['temperature']
         temperature.hass = hass
 
-        session = ClientSession(cookie_jar=cookie_jar)
+        session = ClientSession(cookie_jar=cookie_jar, connector=TCPConnector(verify_ssl=False))
         response = await session.post(
             'https://sh.od.ua/user/tempcontrol/set-temp/',
             headers = {
@@ -287,7 +287,7 @@ async def async_setup(hass, config):
         temperature = call.data['temperature']
         temperature.hass = hass
 
-        session = ClientSession(cookie_jar=cookie_jar)
+        session = ClientSession(cookie_jar=cookie_jar, connector=TCPConnector(verify_ssl=False))
         response = await session.post(
             'https://sh.od.ua/user/tempcontrol/set-temp-nm/',
             headers = {
