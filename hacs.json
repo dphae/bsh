@@ -7,5 +7,5 @@
         "sensor"
     ],
     "iot_class": "cloud_polling",
-    "homeassistant": "0.118.0"
+    "homeassistant": "2021.8.1"
 }

@@ -4,7 +4,7 @@ from homeassistant.const import (
     TEMP_CELSIUS,
     POWER_WATT,
     ENERGY_KILO_WATT_HOUR,
-    VOLT,
+    ELECTRIC_POTENTIAL_VOLT,
     TIME_SECONDS,
     VOLUME_CUBIC_METERS
 )
@@ -207,17 +207,17 @@ sensors = [
 
     {
         'key': 'current voltage',
-        'unit': VOLT,
+        'unit': ELECTRIC_POTENTIAL_VOLT,
         'icon': 'mdi:flash'
     },
     {
         'key': 'this day max voltage',
-        'unit': VOLT,
+        'unit': ELECTRIC_POTENTIAL_VOLT,
         'icon': 'mdi:flash'
     },
     {
         'key': 'this day min voltage',
-        'unit': VOLT,
+        'unit': ELECTRIC_POTENTIAL_VOLT,
         'icon': 'mdi:flash'
     },
 
@@ -427,5 +427,3 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         entities[sensor['key']] = BinarySensor(entities_values, sensor)
 
     add_entities(entities.values())
-
-
